@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  start_f: false
+  max: 1
+
+two:
+  start_f: false
+  max: 1

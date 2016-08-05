@@ -1,0 +1,4 @@
+<h2><%= @story.lines.first.line + "." %></h2>
+<% @story.lines.drop(1).each do |lines| %>
+	<h3><%= lines.line + "." %></h3>
+<% end %>

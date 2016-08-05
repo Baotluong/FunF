@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  line: MyString
+  story_id: 1
+  is_f: false
+  report: 1
+
+two:
+  line: MyString
+  story_id: 1
+  is_f: false
+  report: 1
