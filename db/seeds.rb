@@ -18,7 +18,7 @@ actionlist = ['is going to the mall', 'is meeting someone', 'is doing a science 
               'is reanimating a corpse', 'is planning something']
 
 locationlist = ['under the sea', 'on Mars', 'in space', 'tomorrow',
-                'in Idaho', 'on Mount Olymbus', 'in an alternate reality',
+                'in Idaho', 'on Mount Olympus', 'in an alternate reality',
                 'at King\'s Landing', 'in Gotham City', 'in a dream',
                 'at Hogsmeade', 'in Pallet Town', 'nowhere special', 'under a bridge']        	         
 
@@ -36,10 +36,10 @@ end
 
 25.times do
 	story1 = Story.create(start_f:  [true, false].sample,
-				          max:      rand(20..30))
+				          max:      rand(10..20))
 
 	Line.create(story: 	  story1,
-	            line:     PromptName.order("RANDOM()").first.name + " " + PromptAction.order("RANDOM()").first.action + " " + PromptLocation.order("RANDOM()").first.location,
+	            text:     PromptName.order("RANDOM()").first.name + " " + PromptAction.order("RANDOM()").first.action + " " + PromptLocation.order("RANDOM()").first.location,
 	            is_f:     story1.start_f,
 			    report:   0)
 end

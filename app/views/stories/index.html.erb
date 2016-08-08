@@ -1,5 +1,12 @@
 <h1>Fortunately/Unfortunately</h1>
 
 <% @stories.each do |story| %>
-	<h2><%= link_to story.lines.first.line+".", story_path(story) %></h2>
+	<h2><%= link_to story.lines.first.text+".", story_path(story) %></h2>
+	<% if story.lines.length > 1 %>
+		<% if story.lines.last.is_f %>
+			<h4><%= "Fortunately, "+story.lines.last.text+"." %></h4>
+		<% else %>
+			<h4><%= "Unfortunately, "+story.lines.last.text+"." %></h4>
+		<% end %>
+	<% end %>
 <% end %>

@@ -55,5 +55,6 @@ FunF::Application.routes.draw do
   #   end
 
   resources :stories
+  resources :lines
   root 'stories#index'  
 end

@@ -15,9 +15,9 @@ ActiveRecord::Schema.define(version: 20160803155255) do
 
   create_table "lines", force: true do |t|
     t.integer  "story_id"
-    t.string   "line"
+    t.string   "text"
     t.boolean  "is_f"
-    t.integer  "report"
+    t.integer  "report",     default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

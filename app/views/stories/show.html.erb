@@ -1,4 +1,24 @@
-<h2><%= @story.lines.first.line + "." %></h2>
+<h2><%= @story.lines.first.text + "." %></h2>
 <% @story.lines.drop(1).each do |lines| %>
-	<h3><%= lines.line + "." %></h3>
+	<% if lines.is_f %>
+		<h3><%= "Fortunately, " + lines.text + "." %></h3>
+	<% else %>
+		<h3><%= "Unfortunately, " + lines.text + "." %></h3>
+	<% end %>
 <% end %>
+
+<%= form_tag lines_path, method: "post" do %>
+	<% if @story.lines.last.is_f.! %>
+		<%= label_tag 'Fortunately,' %>
+	<% else %>
+		<%= label_tag 'Unfortunately,' %>
+	<% end %>
+
+	<%= text_field_tag :text %>
+	<%= submit_tag "This happens next." %>
+	<%= hidden_field_tag 'is_f', @story.lines.last.is_f.! %>
+	<%= hidden_field_tag 'story_id', @story.id %>
+<% end %>
+<br>
+<%= button_to "Find a new story", stories_path, method: "get" %>
+<%= button_to "Random Story", method: "get", action: "show", id: Story.order("RANDOM()").first.id %>
