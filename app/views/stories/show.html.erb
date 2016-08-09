@@ -1,3 +1,4 @@
+<br>
 <h2><%= @story.lines.first.text + "." %></h2>
 <% @story.lines.drop(1).each do |lines| %>
 	<% if lines.is_f %>
@@ -7,17 +8,26 @@
 	<% end %>
 <% end %>
 
-<%= form_tag lines_path, method: "post" do %>
-	<% if @story.lines.last.is_f.! %>
-		<%= label_tag 'Fortunately,' %>
-	<% else %>
-		<%= label_tag 'Unfortunately,' %>
-	<% end %>
+<% if @story.lines.length < @story.max %>
+	<%= form_tag lines_path, method: "post" do %>
+		<% if @story.lines.last.is_f.! %>
+			<%= label_tag 'Fortunately,' %>
+		<% else %>
+			<%= label_tag 'Unfortunately,' %>
+		<% end %>
 
-	<%= text_field_tag :text %>
-	<%= submit_tag "This happens next." %>
-	<%= hidden_field_tag 'is_f', @story.lines.last.is_f.! %>
-	<%= hidden_field_tag 'story_id', @story.id %>
+		<%= text_field_tag :text %>
+		<%= submit_tag "This happens next." %>
+		<%= hidden_field_tag 'is_f', @story.lines.last.is_f.! %>
+		<%= hidden_field_tag 'story_id', @story.id %>
+	<% end %>
+<% else %>
+		<%= text_field_tag :text, 'This Story has Ended.' %>
+		<%= submit_tag "This happens next.", disabled: true %>
+<% end %>
+<br>
+<% flash.each do |name, msg| %>
+	<%= content_tag :div, msg, class: "alert alert-info" %>
 <% end %>
 <br>
 <%= button_to "Find a new story", stories_path, method: "get" %>
