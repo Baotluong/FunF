@@ -56,5 +56,6 @@ FunF::Application.routes.draw do
 
   resources :stories
   resources :lines
-  root 'stories#index'  
+  root 'stories#index'
+  match 'stories/:id/report_up' => 'stories#report_up', as: :stories_report_up, via: [:get]
 end

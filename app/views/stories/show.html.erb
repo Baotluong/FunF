@@ -2,7 +2,11 @@
 <h2><%= @story.lines.first.text + "." %></h2>
 <% @story.lines.drop(1).each do |lines| %>
 	<% if lines.is_f %>
-		<h3><%= "Fortunately, " + lines.text + "." %></h3>
+		<h3>
+			<%= "Fortunately, " + lines.text + "." %>
+			<%= ##THIS IS BROKEN. FIX IT %>
+			<%= ##link_to 'Report', stories_report_up(lines.id) %>
+		</h3>
 	<% else %>
 		<h3><%= "Unfortunately, " + lines.text + "." %></h3>
 	<% end %>
@@ -16,10 +20,11 @@
 			<%= label_tag 'Unfortunately,' %>
 		<% end %>
 
-		<%= text_field_tag :text %>
-		<%= submit_tag "This happens next." %>
+		<%= text_field_tag 'text' %>
+		<%= submit_tag 'This happens next.' %>
 		<%= hidden_field_tag 'is_f', @story.lines.last.is_f.! %>
 		<%= hidden_field_tag 'story_id', @story.id %>
+		<%= hidden_field_tag 'line_count', @story.lines.count %>
 	<% end %>
 <% else %>
 		<%= text_field_tag :text, 'This Story has Ended.' %>
@@ -31,4 +36,4 @@
 <% end %>
 <br>
 <%= button_to "Find a new story", stories_path, method: "get" %>
-<%= button_to "Random Story", method: "get", action: "show", id: Story.order("RANDOM()").first.id %>
+<%= button_to "Random Story", story_path(@random_story_id), {method: :get} %>

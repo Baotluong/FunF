@@ -10,8 +10,14 @@ class StoriesController < ApplicationController
 	end
 
 	def show
+		@random_story_id = Random.rand(Story.count) + 1
 	end
 
+	helper_method :report_up
+	def report_up
+		Line.increment_counter(:report, :id)
+	end
+	
 	private
 
 		def find_story
