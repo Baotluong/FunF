@@ -13,6 +13,7 @@ class StoriesController < ApplicationController
 		@random_story_id = Random.rand(Story.count) + 1
 	end
 
+	## BROKEN
 	helper_method :report_up
 	def report_up
 		Line.increment_counter(:report, :id)
