@@ -4,8 +4,7 @@
 	<% if lines.is_f %>
 		<h3>
 			<%= "Fortunately, " + lines.text + "." %>
-			<%# THIS IS BROKEN. FIX IT %>
-			<%# link_to 'Report', stories_report_up(lines.id) %>
+			<%= link_to 'Report', stories_report_up_path(@story, lines) %>
 		</h3>
 	<% else %>
 		<h3><%= "Unfortunately, " + lines.text + "." %></h3>

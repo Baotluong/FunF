@@ -58,5 +58,5 @@ FunF::Application.routes.draw do
   resources :lines
   root 'stories#index'
   # BROKEN
-  match 'stories/:id/report_up' => 'stories#report_up', as: :stories_report_up, via: [:get]
+  match 'stories/:id/lines/:line_id/report_up' => 'stories#report_up', as: :stories_report_up, via: [:get]
 end
