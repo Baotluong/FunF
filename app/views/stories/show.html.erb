@@ -1,14 +1,19 @@
 <br>
 <h2><%= @story.lines.first.text + "." %></h2>
 <% @story.lines.drop(1).each do |lines| %>
-	<% if lines.is_f %>
-		<h3>
-			<%= "Fortunately, " + lines.text + "." %>
-			<%= link_to 'Report', stories_report_up_path(@story, lines) %>
-		</h3>
-	<% else %>
-		<h3><%= "Unfortunately, " + lines.text + "." %></h3>
-	<% end %>
+	<h3>
+		<% if lines.report >= 3 %>
+			[This line has been deleted.]
+		<% else %>
+				<% if lines.is_f %>
+						<%= "Fortunately, " + lines.text + "." %>
+						<%= link_to 'Report', stories_report_up_path(@story, lines) %>
+					<% else %>
+						<%= "Unfortunately, " + lines.text + "." %>
+						<%= link_to 'Report', stories_report_up_path(@story, lines) %>
+				<% end %>
+		<% end %>
+	</h3>
 <% end %>
 
 <% if @story.lines.length < @story.max %>

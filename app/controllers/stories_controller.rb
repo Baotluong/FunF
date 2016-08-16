@@ -13,10 +13,10 @@ class StoriesController < ApplicationController
 		@random_story_id = Random.rand(Story.count) + 1
 	end
 
-	helper_method :report_up
 	def report_up
 		Line.increment_counter(:report, params[:line_id])
-		redirect_to root_path
+		# TODO: Add if statement to delete line if it has been censored and is the last line.
+		redirect_to story_path
 	end
 	
 	private
