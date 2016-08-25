@@ -2,7 +2,15 @@ class StoriesController < ApplicationController
 	before_action :find_story, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@stories = Story.all.order("created_at DESC")
+		if params[:category].blank?
+			@stories = Story.all.order("created_at DESC")
+		elsif params[:category] == "new"
+			@stories = Story.new_stories
+		elsif params[:category] == "continue"
+			@stories = Story.continue_stories
+		else
+			@stories = Story.finished_stories
+		end
 	end
 
 	def create
@@ -10,7 +18,6 @@ class StoriesController < ApplicationController
 	end
 
 	def show
-		@random_story_id = Random.rand(Story.count) + 1
 	end
 
 	def report_up

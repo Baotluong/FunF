@@ -1,10 +1,27 @@
 class Story < ActiveRecord::Base
 	has_many :lines
 
+	# TODO: THIS IS BROKEN.
+	# scope :new_stories, -> lambda { includes(:lines).group("story_id").having("count(story_id) == 1") }
+	# scope :continue_stories, -> lambda { includes(:lines).group("story_id").having("count(story_id) == 1") }
+	# scope :finished_stories, -> lambda { includes(:lines).group("story_id").having("count(story_id) == 1") }
+
 	#TODO: This is a n+1 query. Optimize if it becomes an issue
 	def self.new_stories
 		Story.all.select do |s|
 			s.lines.length == 1
+		end
+	end
+
+	def self.continue_stories
+		Story.all.select do |s|
+			s.lines.length > 1 && s.lines.length < s.max
+		end
+	end
+
+	def self.finished_stories
+		Story.all.select do |s|
+			s.lines.length == s.max
 		end
 	end
 

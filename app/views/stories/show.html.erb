@@ -1,20 +1,6 @@
-<br>
-<h2><%= @story.lines.first.text + "." %></h2>
-<% @story.lines.drop(1).each do |lines| %>
-	<h3>
-		<% if lines.report >= 3 %>
-			[This line has been deleted.]
-		<% else %>
-				<% if lines.is_f %>
-						<%= "Fortunately, " + lines.text + "." %>
-						<%= link_to 'Report', stories_report_up_path(@story, lines) %>
-					<% else %>
-						<%= "Unfortunately, " + lines.text + "." %>
-						<%= link_to 'Report', stories_report_up_path(@story, lines) %>
-				<% end %>
-		<% end %>
-	</h3>
-<% end %>
+<h1><%= @story.lines.first.text + "." %></h1>
+
+<%= render 'form' %>
 
 <% if @story.lines.length < @story.max %>
 	<%= form_tag lines_path, method: "post" do %>
@@ -38,6 +24,3 @@
 <% flash.each do |name, msg| %>
 	<%= content_tag :div, msg, class: "alert alert-info" %>
 <% end %>
-<br>
-<%= button_to "Find a new story", stories_path, method: "get" %>
-<%= button_to "Random Story", story_path(@random_story_id), {method: :get} %>
