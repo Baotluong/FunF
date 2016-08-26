@@ -37,6 +37,8 @@ gem 'railties', '~> 5.0', '>= 5.0.0.1'
 gem 'devise', '~> 4.2'
 
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+
+gem 'rails_12factor'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
