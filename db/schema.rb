@@ -12,30 +12,33 @@
 
 ActiveRecord::Schema.define(version: 20160816221830) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "lines", force: :cascade do |t|
     t.integer  "story_id"
-    t.string   "text",       limit: 255
+    t.string   "text"
     t.boolean  "is_f"
-    t.integer  "report",                 default: 0
+    t.integer  "report",     default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["story_id"], name: "index_lines_on_story_id"
+    t.index ["story_id"], name: "index_lines_on_story_id", using: :btree
   end
 
   create_table "prompt_actions", force: :cascade do |t|
-    t.string   "action",     limit: 255
+    t.string   "action"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "prompt_locations", force: :cascade do |t|
-    t.string   "location",   limit: 255
+    t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "prompt_names", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -60,8 +63,8 @@ ActiveRecord::Schema.define(version: 20160816221830) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
 end
