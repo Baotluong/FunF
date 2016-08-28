@@ -1,8 +1,9 @@
-<h1><%= @story.lines.first.text + "." %></h1>
+<h3><%= @story.lines.first.text + "." %></h3>
 
 <%= render 'form' %>
 
 <% if @story.lines.length < @story.max %>
+
 	<%= form_tag lines_path, method: "post" do %>
 		<% if @story.lines.last.is_f.! %>
 			<%= label_tag 'Fortunately,' %>
@@ -16,9 +17,11 @@
 		<%= hidden_field_tag 'story_id', @story.id %>
 		<%= hidden_field_tag 'line_count', @story.lines.count %>
 	<% end %>
+
 <% else %>
-		<%= text_field_tag :text, 'This Story has Ended.' %>
-		<%= submit_tag "This happens next.", disabled: true %>
+
+	<h4> THE END. </h4>
+
 <% end %>
 <br>
 <% flash.each do |name, msg| %>

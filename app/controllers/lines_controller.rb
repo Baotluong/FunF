@@ -4,22 +4,21 @@ class LinesController < ApplicationController
 	end
 
 	def create
-		puts line_params
-		@line = Line.create(line_params())
-		if @line
+		@line = Line.new(line_params)
+		if @line.save
 			## creates new story when a story ends
 			if @line.story.lines.length == @line.story.max
 				Story.create_new
 
 				flash[:success] = "The End."
-	     	    redirect_to controller: "stories", action: "show", id: @line.story_id
+	     	    redirect_to story_path(@line.story_id)
 	     	else
 	     		flash[:success] = "Thank you for contributing."
-	     		redirect_to controller: "stories", action: "show", id: @line.story_id
+	     		redirect_to story_path(@line.story_id)
 	     	end
 	    else
-	    	flash[:success] = "Error."
-	       	redirect_to controller: "stories", action: "show", id: @line.story_id
+	    	flash[:failure] = "Error."
+	       	redirect_to story_path(@line.story_id)
 	    end
 	end
 

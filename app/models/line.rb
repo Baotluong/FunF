@@ -3,6 +3,7 @@ class Line < ActiveRecord::Base
 	validates :text, presence: true
 	before_save :check_exists
 	attr_accessor :line_count
+  	default_scope { order('id ASC') }
 
 	private
 

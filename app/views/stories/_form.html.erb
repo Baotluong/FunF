@@ -1,6 +1,6 @@
 <% @story.lines.drop(1).each do |lines| %>
-	<h3>
-		<% if lines.report >= 3 %>
+	<h4>
+		<% if lines.report >= @reports_allowed %>
 			[This line has been deleted.]
 		<% else %>
 				<% if lines.is_f %>
@@ -11,5 +11,5 @@
 						<%= link_to 'Report', stories_report_up_path(@story, lines) %>
 				<% end %>
 		<% end %>
-	</h3>
+	</h4>
 <% end %>

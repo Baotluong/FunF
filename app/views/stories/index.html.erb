@@ -1,16 +1,14 @@
-<h1>Fortunately/Unfortunately</h1>
-
 <% @stories.each do |story| %>
-	<h2><%= link_to story.lines.first.text+".", story_path(story) %></h2>
+	<h3 class="prompt-line"><%= link_to story.lines.first.text+".", story_path(story) %></h3>
 	<% if story.lines.length > 1 %>
 		<h4>
-		<% if story.lines.second.report >= 3 %>
+		<% if story.lines.last.report >= @reports_allowed %>
 			[This line has been deleted.]
 		<% else %>
-				<% if story.lines.first.is_f %>
-						<%= "Fortunately, " + story.lines.second.text + "." %>
+				<% if story.lines.last.is_f %>
+						<%= "Fortunately, " + story.lines.last.text + "." %>
 					<% else %>
-						<%= "Unfortunately, " + story.lines.second.text + "." %>
+						<%= "Unfortunately, " + story.lines.last.text + "." %>
 				<% end %>
 		<% end %>
 		</h4>

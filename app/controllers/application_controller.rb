@@ -4,10 +4,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # QUESTION: HOW DOES THE BEFORE FILTER WORK?
-  before_filter :random_story_id
+  before_filter :random_story_id, :reports_allowed
 
   def random_story_id
   	@random_story_id = Random.rand(Story.count) + 1
   end
-  
+
+  def reports_allowed
+  	@reports_allowed = 3
+  end
+
 end
