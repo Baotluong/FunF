@@ -24,12 +24,9 @@ class StoriesController < ApplicationController
 		# TODO: Add if statement to delete line if it has been censored and is the last line.
 		reported_line = Line.find(params[:line_id])
 
-		puts params[:line_id]
-
 		if cookies[params[:line_id]] != params[:line_id]
 			cookies[params[:line_id]] = { value: params[:line_id], expires: 5.minute.from_now }
 
-			puts "Moo works"
 			Line.increment_counter(:report, params[:line_id])
 
 			if reported_line.report >= @reports_allowed
@@ -46,7 +43,8 @@ class StoriesController < ApplicationController
 			flash[:failure] = "You cannot report this line again so soon."
 		end
 
-		redirect_to story_path
+		# TODO: FIX THIS. IT IS IDENTICAL TO THE OTHER ANCHORS. IDK BRAH
+	    redirect_to story_path(reported_line.story_id, :anchor => "flash-anchor")
 	end
 	
 	private

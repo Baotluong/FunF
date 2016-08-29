@@ -36,12 +36,15 @@
 	<% end %>
 
 <% else %>
-
-	<h4> THE END. </h4>
+	
+	<div class="pbubble">
+		<strong>THE END</strong>
+	</div>
 
 <% end %>
 <br>
 <br>
+<a name="flash-anchor"></a>
 <% flash.each do |name, msg| %>
 	<% if flash[:success] %>
 		<div class="alert alert-success">

@@ -11,14 +11,14 @@ class LinesController < ApplicationController
 				Story.create_new
 
 				flash[:success] = "The End."
-	     	    redirect_to story_path(@line.story_id)
+	     	    redirect_to story_path(@line.story_id, :anchor => "flash-anchor")
 	     	else
 	     		flash[:success] = "Thank you for contributing."
-	     		redirect_to story_path(@line.story_id)
+	     		redirect_to story_path(@line.story_id, :anchor => "flash-anchor")
 	     	end
 	    else
 	    	flash[:failure] = "Error."
-	       	redirect_to story_path(@line.story_id)
+	       	redirect_to story_path(@line.story_id, :anchor => "flash-anchor")
 	    end
 	end
 
