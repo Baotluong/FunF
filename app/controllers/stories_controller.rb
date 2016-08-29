@@ -24,8 +24,10 @@ class StoriesController < ApplicationController
 		# TODO: Add if statement to delete line if it has been censored and is the last line.
 		reported_line = Line.find(params[:line_id])
 
-		if cookies[:login] != "XJ-121"
-			cookies[:login] = { value: "XJ-121", expires: 1.minute.from_now }
+		puts params[:line_id]
+
+		if cookies[params[:line_id]] != params[:line_id]
+			cookies[params[:line_id]] = { value: params[:line_id], expires: 5.minute.from_now }
 
 			puts "Moo works"
 			Line.increment_counter(:report, params[:line_id])
@@ -41,7 +43,7 @@ class StoriesController < ApplicationController
 		    	flash[:success] = "Report has been submitted."
 		    end
 		else
-			flash[:failure] = "You have reported recently."
+			flash[:failure] = "You cannot report this line again so soon."
 		end
 
 		redirect_to story_path
