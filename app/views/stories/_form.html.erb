@@ -6,7 +6,7 @@
 			<% else %>
 				<strong>Fortunately, </strong><%= lines.text + "." %>
 				<div class="links btn-group btn-group-xs">
-					<%= link_to 'Report', stories_report_up_path(@story, lines), class: "btn btn-custom" %>
+					<%= link_to 'Report', stories_report_up_path(@story, lines), class: "btn btn-custom", id:"report-button" %>
 				</div>
 			<% end %>
 		</div>
@@ -18,7 +18,7 @@
 			<% else %>
 				<strong>Unfortunately, </strong><%=lines.text + "." %>
 				<div class="links btn-group btn-group-xs">
-					<%= link_to 'Report', stories_report_up_path(@story, lines), class: "btn btn-custom" %>
+					<%= link_to 'Report', stories_report_up_path(@story, lines), class: "btn btn-custom", id:"report-button" %>
 				</div>
 			<% end %>
 		</div>
