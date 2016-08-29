@@ -1,4 +1,7 @@
 <br>
+
+<%= render :partial => "layouts/modal" %> 
+
 <div class="index-stories">
 	<% @stories.each do |story| %>
 		<%= link_to story_path(story) do %>

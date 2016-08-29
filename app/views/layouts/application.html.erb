@@ -33,10 +33,13 @@
 		    	</ul>
 
 		    	<ul class="nav navbar-nav navbar-right">
-		        
-		        	<li><%= link_to "Random Story ", story_path(@random_story_id), {method: :get} %></li>
-					
-		    	</ul>
+		        	<li>
+		        		<button type="button" class="btn btn-default navbar-btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">
+  						How to play
+  						</button>
+  					</li>
+					<li><%= link_to "Random Story ", story_path(@random_story_id), {method: :get} %></li>
+				</ul>
 
 			</div><!-- /.navbar-collapse -->
 	  	
