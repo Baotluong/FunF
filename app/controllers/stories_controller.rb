@@ -9,7 +9,7 @@ class StoriesController < ApplicationController
 		elsif params[:category] == "finished"
 			@stories = Story.finished_stories
 		else
-			@stories = Story.all.order("created_at ASC")
+			@stories = Story.all.shuffle
 		end
 	end
 

@@ -14,3 +14,114 @@
  
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+body{
+	background-color: #f0f8ff;	
+}
+
+a:link,a:visited,a:visited,a:active{
+	color:black;
+    text-decoration: none;
+}
+
+.fbubble 
+{
+	position: relative;
+	width: 600px;
+	min-height: 45px;
+	padding: 5px;
+	background: #D2D3FF;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: #007EA2 solid 3px;
+	word-wrap: break-word;
+	box-shadow: 8px 8px 30px #888888;
+}
+
+.f2bubble 
+{
+	position: relative;
+	width: 700px;
+	height: 130px;
+	padding: 5px;
+	background: #D2D3FF;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: #007EA2 solid 3px;
+	word-wrap: break-word;
+	box-shadow: 8px 8px 30px #888888;
+}
+
+.ububble 
+{
+	position: relative;
+	left: 100px;
+	width: 600px;
+	min-height: 45px;
+	padding: 5px;
+	background: #FFD3FF;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: #6B2D6A solid 3px;
+	word-wrap: break-word;
+	vertical-align: middle;
+	box-shadow: -8px 8px 30px #888888;
+}
+
+.u2bubble 
+{
+	position: relative;
+	width: 700px;
+	height: 130px;
+	padding: 5px;
+	background: #FFD3FF;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: #6B2D6A solid 3px;
+	word-wrap: break-word;
+	vertical-align: middle;
+	box-shadow: -8px 8px 30px #888888;
+}
+
+.pbubble 
+{
+	position: relative;
+	width: 700px;
+	min-height: 45px;
+	padding: 5px;
+	background: #E7FFE5;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: #007E00 solid 3px;
+	box-shadow: 0px 8px 30px #888888;
+	text-align: center;
+	strong {
+		font-size: 18px;
+	}
+	#fortunate{
+		text-align: left;
+	}
+	#unfortunate{
+		text-align: left;
+	}
+}
+
+.btn-custom {
+	color: #333;
+	background-color: #fff;
+	border: 1px solid #222;
+	padding: 8px 20px;
+	border-radius: 5px;
+	font-family: 'Ubuntu', sans-serif;
+	&:hover {
+		text-decoration: none;
+		background-color: #333;
+		color: #fff;
+		transition: 0.5s;
+	}	
+}

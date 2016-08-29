@@ -1,16 +1,30 @@
+<br>
 <% @stories.each do |story| %>
-	<h3 class="prompt-line"><%= link_to story.lines.first.text+".", story_path(story) %></h3>
-	<% if story.lines.length > 1 %>
-		<h4>
-		<% if story.lines.last.report >= @reports_allowed %>
-			[This line has been deleted.]
-		<% else %>
+
+	<%= link_to story_path(story) do %>
+		<div class="pbubble">
+			<strong><%= story.lines.first.text+"." %></strong>
+			<br>
+			<% if story.lines.length > 1 %>
 				<% if story.lines.last.is_f %>
-						<%= "Fortunately, " + story.lines.last.text + "." %>
-					<% else %>
-						<%= "Unfortunately, " + story.lines.last.text + "." %>
+					<div id="fortunate">
+						<% if story.lines.last.report >= @reports_allowed %>
+							[This line has been deleted.]
+						<% else %>
+							Fortunately, <%=story.lines.last.text + "." %>
+						<% end %>
+					</div>
+				<% else %>
+					<div id="unfortunate">
+						<% if story.lines.last.report >= @reports_allowed %>
+							[This line has been deleted.]
+						<% else %>
+							Unfortunately, <%=story.lines.last.text + "." %>
+						<% end %>
+					</div>
 				<% end %>
-		<% end %>
-		</h4>
+			<% end %>
+		</div>
 	<% end %>
+	<div style="height:8px;"></div>
 <% end %>
