@@ -19,9 +19,11 @@ body{
 	background-color: #f0f8ff;	
 }
 
-a:link,a:visited,a:visited,a:active{
+.index-stories{
+	a:link, a:visited, a:visited, a:active{
 	color:black;
     text-decoration: none;
+	}
 }
 
 .fbubble 
@@ -104,10 +106,12 @@ a:link,a:visited,a:visited,a:active{
 		font-size: 18px;
 	}
 	#fortunate{
-		text-align: left;
+		text-align: center;
+		font-size: 16px;
 	}
 	#unfortunate{
-		text-align: left;
+		text-align: center;
+		font-size: 16px;
 	}
 }
 

@@ -46,7 +46,7 @@
 	<% if flash[:success] %>
 		<div class="alert alert-success">
   			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  			<%= msg %>
+  			<%= msg %><%= link_to " Play another story!", story_path(@random_story_id), {method: :get} %>
 		</div>
 	<% else %>
 		<div class="alert alert-danger">
