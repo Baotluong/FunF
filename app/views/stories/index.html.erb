@@ -2,33 +2,35 @@
 
 <%= render :partial => "layouts/modal" %> 
 
-<div class="index-stories">
-	<% @stories.each do |story| %>
+
+
+<% @stories.each do |story| %>
+<div class="row">
+	<div class="pbubble index-stories col-sm-6 col-sm-offset-3">
 		<%= link_to story_path(story) do %>
-			<div class="pbubble">
-				<strong><%= story.lines.first.text+"." %></strong>
-				<br>
-				<% if story.lines.length > 1 %>
-					<% if story.lines.last.is_f %>
-						<div id="fortunate">
-							<% if story.lines.last.report >= @reports_allowed %>
-								[This line has been deleted.]
-							<% else %>
-								Fortunately, <%=story.lines.last.text + "." %>
-							<% end %>
-						</div>
-					<% else %>
-						<div id="unfortunate">
-							<% if story.lines.last.report >= @reports_allowed %>
-								[This line has been deleted.]
-							<% else %>
-								Unfortunately, <%=story.lines.last.text + "." %>
-							<% end %>
-						</div>
-					<% end %>
+			<strong><%= story.lines.first.text+"." %></strong>
+			<br>
+			<% if story.lines.length > 1 %>
+				<% if story.lines.last.is_f %>
+					<div id="fortunate">
+						<% if story.lines.last.report >= @reports_allowed %>
+							[This line has been deleted.]
+						<% else %>
+							Fortunately, <%=story.lines.last.text + "." %>
+						<% end %>
+					</div>
+				<% else %>
+					<div id="unfortunate">
+						<% if story.lines.last.report >= @reports_allowed %>
+							[This line has been deleted.]
+						<% else %>
+							Unfortunately, <%=story.lines.last.text + "." %>
+						<% end %>
+					</div>
 				<% end %>
-			</div>
+			<% end %>
 		<% end %>
-	<div style="height:8px;"></div>
-	<% end %>
+	</div>
 </div>
+<div style="height:8px;"></div>
+<% end %>

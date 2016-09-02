@@ -1,63 +1,63 @@
 <%= render :partial => "layouts/modal" %> 
+<div class="col-sm-6 col-sm-offset-3">
+	<div class="pbubble">
+		<strong><%= @story.lines.first.text + "." %></strong>
+	</div>
+	<div style="height:12px;"></div>
 
-<br>
-<div class="pbubble">
-	<strong><%= @story.lines.first.text + "." %></strong>
-</div>
-<div style="height:12px;"></div>
 
+	<%= render 'form' %>
 
-<%= render 'form' %>
+	<% if @story.lines.length < @story.max %>
 
-<% if @story.lines.length < @story.max %>
+		<%= form_tag lines_path, method: "post" do %>
+			
+			<% if @story.lines.last.is_f.! %>
+				<div class="f2bubble">
+					<label for="fortunately-label">Fortunately,</label>
+			<% else %>
+				<div class="u2bubble">
+					<label for="unfortunately-label">Unfortunately,</label>
+			<% end %>
 
-	<%= form_tag lines_path, method: "post" do %>
-		
-		<% if @story.lines.last.is_f.! %>
-			<div class="f2bubble">
-				<label for="fortunately-label">Fortunately,</label>
-		<% else %>
-			<div class="u2bubble">
-				<label for="unfortunately-label">Unfortunately,</label>
+			<div class="form-group">
+	    		<input type="text" class="form-control" id="text" name="text" placeholder="This happens next." rows="3">
+	  		</div>
+
+			<div class="form-group">
+	    		<div class="col-sm-offset-10 col-sm-10">
+	      			<button type="submit" class="btn btn-custom">Submit</button>
+	    		</div>
+	  		</div>
+
+			<%= hidden_field_tag 'is_f', @story.lines.last.is_f.! %>
+			<%= hidden_field_tag 'story_id', @story.id %>
+			<%= hidden_field_tag 'line_count', @story.lines.count %>
+				</div>
 		<% end %>
 
-		<div class="form-group">
-    		<input type="text" class="form-control" id="text" name="text" placeholder="This happens next." rows="3">
-  		</div>
-
-		<div class="form-group">
-    		<div class="col-sm-offset-10 col-sm-10">
-      			<button type="submit" class="btn btn-custom">Submit</button>
-    		</div>
-  		</div>
-
-		<%= hidden_field_tag 'is_f', @story.lines.last.is_f.! %>
-		<%= hidden_field_tag 'story_id', @story.id %>
-		<%= hidden_field_tag 'line_count', @story.lines.count %>
-			</div>
-	<% end %>
-
-<% else %>
-	
-	<div class="pbubble">
-		<strong>THE END</strong>
-	</div>
-
-<% end %>
-<br>
-<br>
-<a name="flash-anchor"></a>
-<% flash.each do |name, msg| %>
-	<% if flash[:success] %>
-		<div class="alert alert-success">
-  			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  			<%= msg %><%= link_to " Play another story!", story_path(@random_story_id), {method: :get} %>
-		</div>
 	<% else %>
-		<div class="alert alert-danger">
-  			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  			<%= msg %>
+		
+		<div class="pbubble">
+			<strong>THE END</strong>
 		</div>
 
 	<% end %>
-<% end %>
+	<br>
+	<br>
+	<a name="flash-anchor"></a>
+	<% flash.each do |name, msg| %>
+		<% if flash[:success] %>
+			<div class="alert alert-success">
+	  			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	  			<%= msg %><%= link_to " Play another story!", story_path(@random_story_id), {method: :get} %>
+			</div>
+		<% else %>
+			<div class="alert alert-danger">
+	  			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	  			<%= msg %>
+			</div>
+
+		<% end %>
+	<% end %>
+</div>
