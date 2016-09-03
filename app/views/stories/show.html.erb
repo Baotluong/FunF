@@ -5,7 +5,6 @@
 	</div>
 	<div style="height:12px;"></div>
 
-
 	<%= render 'form' %>
 
 	<% if @story.lines.length < @story.max %>
@@ -20,19 +19,13 @@
 					<label for="unfortunately-label">Unfortunately,</label>
 			<% end %>
 
-			<div class="form-group">
-	    		<input type="text" class="form-control" id="text" name="text" placeholder="This happens next." rows="3">
-	  		</div>
-
-			<div class="form-group">
-	    		<div class="col-sm-offset-10 col-sm-10">
-	      			<button type="submit" class="btn btn-custom">Submit</button>
-	    		</div>
-	  		</div>
-
-			<%= hidden_field_tag 'is_f', @story.lines.last.is_f.! %>
-			<%= hidden_field_tag 'story_id', @story.id %>
-			<%= hidden_field_tag 'line_count', @story.lines.count %>
+		    		<input type="text" class="form-control" id="text" name="text" placeholder="This happens next." rows="3">
+		    		<div style="height:8px;"></div>
+		     		<button type="submit" class="btn btn-default btn-sm">Submit</button>
+			    	
+					<%= hidden_field_tag 'is_f', @story.lines.last.is_f.! %>
+					<%= hidden_field_tag 'story_id', @story.id %>
+					<%= hidden_field_tag 'line_count', @story.lines.count %>
 				</div>
 		<% end %>
 
