@@ -37,7 +37,7 @@
 
 	<% if @story.lines.length < @story.max %>
 
-		<%= form_tag lines_path, method: "post", id: "line-form", remote: true do %>
+		<%= form_tag lines_path, method: "post", id: "line-form", remote: true, autocomplete: "off" do %>
 			
 			<% if @story.lines.last.is_f.! %>
 				<div class="f2bubble">
