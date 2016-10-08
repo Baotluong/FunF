@@ -37,7 +37,7 @@
 
 	<% if @story.lines.length < @story.max %>
 
-		<%= form_tag lines_path, method: "post", id: "line-form", remote:"true" do %>
+		<%= form_tag lines_path, method: "post", id: "line-form", remote: true do %>
 			
 			<% if @story.lines.last.is_f.! %>
 				<div class="f2bubble">
@@ -96,7 +96,6 @@
 	        'data' : {'last' : lastId }
 	      }).always(function(responseData) {
 	        if(responseData.length > 0) {
-	          console.log(responseData);	
 	          appendLines(responseData);
 	          lastLineId = responseData[responseData.length - 1].id;
 	        }
@@ -107,7 +106,6 @@
 	      for(var i = 0; i < newLines.length; i++) {
 	      	console.log("newLines.length = "+newLines.length);
 	      	var newLine = newLines[i];
-	      	console.log(newLine);
 	      	if(newLine.is_f){
 	      		$('.lines_div').append("<div class='fbubble new'><strong>Fortunately, </strong>" + newLine.text + ". <div class='links btn-group btn-group-xs'><a href = '/report/" + newLine.id + "/report_up' class='btn btn-custom', id='report-button'>Report</a></div></div><div style='height:8px;'></div>");
 	      		$('.f2bubble').addClass('u2bubble').removeClass('f2bubble');
@@ -134,7 +132,7 @@
 	    $(document).ready(function(){
 	    	window.linesInterval;
 	    	clearInterval(window.linesInterval);	    
-	    	linesInterval = setInterval(function(){fetchLines(lastLineId); console.log("Last Line Id during setInterval:" + lastLineId)}, 5000);
+	    	linesInterval = setInterval(function(){fetchLines(lastLineId)}, 5000);
 	    });
 	});
 
