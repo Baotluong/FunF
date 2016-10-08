@@ -88,8 +88,6 @@
 		var lastLineId = "<%= @story.lines.last.id %>";
 		var line_count = "<%= @story.lines.count %>";
 
-		console.log("Last Line Id on load:" + lastLineId);
-
 		function fetchLines(lastId) {
 	      $.ajax({
 	        'url' : "<%= lines_since_path %>",
