@@ -25,7 +25,7 @@ class StoriesController < ApplicationController
 		reported_line = Line.find(params[:line_id])
 
 		if cookies[params[:line_id]] != params[:line_id]
-			cookies[params[:line_id]] = { value: params[:line_id], expires: 5.minute.from_now }
+			cookies[params[:line_id]] = { value: params[:line_id], expires: 180.minute.from_now }
 
 			Line.increment_counter(:report, params[:line_id])
 
@@ -43,8 +43,19 @@ class StoriesController < ApplicationController
 			flash[:failure] = "You cannot report this line again so soon."
 		end
 
-		# TODO: FIX THIS. IT IS IDENTICAL TO THE OTHER ANCHORS. IDK BRAH
-	    redirect_to story_path(reported_line.story_id, :anchor => "flash-anchor")
+	    redirect_to story_path(reported_line.story_id)
+	end
+
+	def lines_since
+		if (params[:last])
+			newLines = Line.find(params[:last]).story.lines.where( "id > #{params[:last]}" )
+			newLines = newLines.map do |newLine|
+				{ text: newLine.text, id: newLine.id, is_f: newLine.is_f, report: newLine.report, max:newLine.story.max }
+			end
+		else
+			newLines = []
+		end
+		render json: newLines.to_json
 	end
 	
 	private

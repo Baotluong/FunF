@@ -5,11 +5,39 @@
 	</div>
 	<div style="height:12px;"></div>
 
-	<%= render 'form' %>
+	<div class="lines_div">
+		<% @story.lines.drop(1).each do |lines| %>
+			<% if lines.is_f %>
+				<div class="fbubble">
+					<% if lines.report >= @reports_allowed %>
+						<strong>[This line has been deleted.]</strong>
+					<% else %>
+						<strong>Fortunately, </strong><%= lines.text + "." %>
+						<div class="links btn-group btn-group-xs">
+							<a href= <%= "/report/#{lines.id}/report_up" %> class="btn btn-custom", id="report-button" %>Report</a>
+						</div>
+					<% end %>
+				</div>
+				<div style="height:8px;"></div>
+				<% else %>
+				<div class="ububble">
+					<% if lines.report >= @reports_allowed %>
+						<strong>[This line has been deleted.]</strong>
+					<% else %>
+						<strong>Unfortunately, </strong><%=lines.text + "." %>
+						<div class="links btn-group btn-group-xs">
+							<a href= <%= "/report/#{lines.id}/report_up" %> class="btn btn-custom", id="report-button" %>Report</a>
+						</div>
+					<% end %>
+				</div>
+				<div style="height:8px;"></div>
+			<% end %>
+		<% end %>
+	</div>
 
 	<% if @story.lines.length < @story.max %>
 
-		<%= form_tag lines_path, method: "post" do %>
+		<%= form_tag lines_path, method: "post", id: "line-form", remote:"true" do %>
 			
 			<% if @story.lines.last.is_f.! %>
 				<div class="f2bubble">
@@ -19,13 +47,13 @@
 					<label for="unfortunately-label">Unfortunately,</label>
 			<% end %>
 
-		    		<input type="text" class="form-control" id="text" name="text" placeholder="This happens next." rows="3">
+		    		<input type="text" class="form-control" id="text-form" name="text" placeholder="This happens next." rows="3">
 		    		<div style="height:8px;"></div>
 		     		<button type="submit" class="btn btn-default btn-sm">Submit</button>
-			    	
-					<%= hidden_field_tag 'is_f', @story.lines.last.is_f.! %>
-					<%= hidden_field_tag 'story_id', @story.id %>
-					<%= hidden_field_tag 'line_count', @story.lines.count %>
+			   	
+					<%= hidden_field_tag 'is_f', @story.lines.last.is_f.!,:id => "hidden_is_f" %>
+					<%= hidden_field_tag 'story_id', @story.id, :id => "hidden_story_id" %>
+					<%= hidden_field_tag 'line_count', @story.lines.count, :id => "hidden_line_count" %>
 				</div>
 		<% end %>
 
@@ -38,7 +66,6 @@
 	<% end %>
 	<br>
 	<br>
-	<a name="flash-anchor"></a>
 	<% flash.each do |name, msg| %>
 		<% if flash[:success] %>
 			<div class="alert alert-success">
@@ -54,3 +81,61 @@
 		<% end %>
 	<% end %>
 </div>
+
+<script>
+
+	$(function(){	
+		var lastLineId = "<%= @story.lines.last.id %>";
+		var line_count = "<%= @story.lines.count %>";
+
+		console.log("Last Line Id on load:" + lastLineId);
+
+		function fetchLines(lastId) {
+	      $.ajax({
+	        'url' : "<%= lines_since_path %>",
+	        'data' : {'last' : lastId }
+	      }).always(function(responseData) {
+	        if(responseData.length > 0) {
+	          console.log(responseData);	
+	          appendLines(responseData);
+	          lastLineId = responseData[responseData.length - 1].id;
+	        }
+	      });
+    	}
+
+    	function appendLines(newLines) {
+	      for(var i = 0; i < newLines.length; i++) {
+	      	console.log("newLines.length = "+newLines.length);
+	      	var newLine = newLines[i];
+	      	console.log(newLine);
+	      	if(newLine.is_f){
+	      		$('.lines_div').append("<div class='fbubble new'><strong>Fortunately, </strong>" + newLine.text + ". <div class='links btn-group btn-group-xs'><a href = '/report/" + newLine.id + "/report_up' class='btn btn-custom', id='report-button'>Report</a></div></div><div style='height:8px;'></div>");
+	      		$('.f2bubble').addClass('u2bubble').removeClass('f2bubble');
+	      		$('label').text('Unfortunately, ');
+	      		$('#hidden_is_f').val(false);
+	      	}else{
+	      		$('.lines_div').append("<div class='ububble new'><strong>Unfortunately, </strong>" + newLine.text + ". <div class='links btn-group btn-group-xs'><a href = '/report/" + newLine.id + "/report_up' class='btn btn-custom', id='report-button'>Report</a></div></div><div style='height:8px;'></div>");
+	      		$('.ububble').last().fadeTo('slow', 0.5).fadeTo('slow', 1.0);
+	      		$('.u2bubble').addClass('f2bubble').removeClass('u2bubble');
+	      		$('label').text('Fortunately, ');
+	      		$('#hidden_is_f').val(true);
+	      	}
+	      	line_count++;
+	      	$('#hidden_line_count').val(line_count);
+	      	console.log(line_count);
+	      	if(line_count >= newLine.max){
+	      		$('.u2bubble, .f2bubble').hide();
+	      		$('.lines_div').append("<div class='pbubble'><strong>THE END</strong></div>");
+	      	}	      		
+	      }
+	    }
+	    //The Form Breaks after I append something to the page, but then after the first submit you can submit again
+
+	    $(document).ready(function(){
+	    	window.linesInterval;
+	    	clearInterval(window.linesInterval);	    
+	    	linesInterval = setInterval(function(){fetchLines(lastLineId); console.log("Last Line Id during setInterval:" + lastLineId)}, 5000);
+	    });
+	});
+
+</script>

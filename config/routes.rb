@@ -59,7 +59,11 @@ FunF::Application.routes.draw do
   resources :lines
 
   root 'stories#index'
-  # BROKEN
-  match 'stories/:id/lines/:line_id/report_up' => 'stories#report_up', as: :stories_report_up, via: [:get]
+  
+  match 'report/:line_id/report_up' => 'stories#report_up', as: :stories_report_up, via: [:get]
+
+  scope :api do
+    get 'lines_since', to: 'stories#lines_since', as: 'lines_since'
+  end
 
 end
