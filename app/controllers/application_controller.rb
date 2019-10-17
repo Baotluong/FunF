@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def reports_allowed
-  	@reports_allowed = 3
+  	@reports_allowed = 20
   end
 
 end
