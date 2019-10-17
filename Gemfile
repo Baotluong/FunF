@@ -35,7 +35,7 @@ gem 'railties', '~> 5.0', '>= 5.0.0.1'
 
 gem 'devise', '~> 4.2'
 
-gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+gem 'bootstrap-sass', '~> 3.4'
 
 gem 'rails_12factor'
 
