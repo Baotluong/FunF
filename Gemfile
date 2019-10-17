@@ -39,4 +39,4 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 
 gem 'rails_12factor'
 
-gem 'simple_form', '~> 3.3', '>= 3.3.1'
+gem 'simple_form', '~> 5.0'
